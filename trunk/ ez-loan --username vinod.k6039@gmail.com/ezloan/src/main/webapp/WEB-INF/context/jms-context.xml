@@ -1,0 +1,57 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd">
+    
+ <context:annotation-config/>
+ <context:component-scan base-package="com.ez.jms.message.sender.service"/>   
+
+<!--
+    Creating JNDI Template to lookup JNDI for Queue and connection Factory
+  -->  
+<bean class="org.springframework.jndi.JndiTemplate" id="jndiTemplate">
+		<property name="environment">
+			<props>
+				<prop key="java.naming.factory.initial">org.jnp.interfaces.NamingContextFactory</prop>
+				<prop key="java.naming.factory.url.pkgs">org.jboss.naming:org.jnp.interfaces</prop>
+				<prop key="java.naming.provider.url">jnp://localhost:1099</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!--
+	     Getting the connection Factory using jndiTemplate
+	 -->
+	<bean class="org.springframework.jndi.JndiObjectFactoryBean" id="connectionFactory">
+		<property name="jndiTemplate" ref="jndiTemplate"></property>
+		<property name="jndiName" value="ConnectionFactory"></property>
+	</bean>
+	
+	<!-- JNDI lookup for the queue -->
+	<bean class="org.springframework.jndi.JndiObjectFactoryBean" id="destination">
+		<property name="jndiTemplate" ref="jndiTemplate"></property>
+		<property name="jndiName" value="queue/synergisitic"></property>
+	</bean>
+	
+	<!-- 
+	    creating JMSTemplate to access the data from database 
+	-->
+	<bean class="org.springframework.jms.core.JmsTemplate" id="jmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="defaultDestination" ref="destination"></property>
+	</bean>
+	
+	<!-- Injecting this service inside the MsgSenderService to send the message to JNDI queue -->
+	<!-- <bean class="com.client.MsgSenderService" id="messageSenderService" >
+	    <property name="jmsTemplate"  ref="jmsTemplate"/>
+	</bean> -->
+</beans>  

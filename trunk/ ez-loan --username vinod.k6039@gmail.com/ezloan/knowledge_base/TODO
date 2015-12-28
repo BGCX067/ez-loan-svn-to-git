@@ -1,0 +1,11 @@
+1. SSL Implementation
+2. Implement Abstract class in this project.
+3. Deploying/Porting application on JBoss.
+4. Hibernate in distributed transaction
+5. Using DataSource/Connection Pool
+6. JNDI
+7. Exception Handling
+
+DS TX
+http://techannotation.wordpress.com/2012/10/04/spring-jta-with-jboss/
+http://techannotation.wordpress.com/2012/10/04/spring-jta-with-jboss/

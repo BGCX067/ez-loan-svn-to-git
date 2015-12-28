@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+	<local-tx-datasource>
+		<jndi-name>LoanAppDS</jndi-name>
+		<connection-url>jdbc:mysql://localhost:3306/ezloan</connection-url>
+		<driver-class>com.mysql.jdbc.Driver</driver-class>
+		<user-name>root</user-name>
+		<password>root</password>
+		<!-- the minimum size of the connection pool -->
+		<min-pool-size>10</min-pool-size>
+		<!-- The maximum connections in a pool/sub-pool -->
+		<max-pool-size>50</max-pool-size>
+	</local-tx-datasource>
+</datasources>

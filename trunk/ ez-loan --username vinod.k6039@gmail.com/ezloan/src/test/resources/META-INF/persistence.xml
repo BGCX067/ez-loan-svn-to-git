@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+<!-- Here the transaction type is Local coz only one Database -->
+ <persistence-unit name="testJPAezLoan" transaction-type="RESOURCE_LOCAL">
+		<class>com.ez.model.entity.BankEntity</class>
+		<class>com.ez.model.entity.CustomerEntity</class>
+		<class>com.ez.model.entity.DepartmentEntity</class>
+		<class>com.ez.model.entity.EmployeeEntity</class>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true"/>
+			<property name="hibernate.use_sql_comments" value="true"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.connection.username" value="root" />
+			<property name="hibernate.connection.password" value="root" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/ezloan_test_db" />
+		</properties>
+	</persistence-unit>
+	
+	
+	<!-- <persistence-unit name="JPAezLoan" transaction-type="JTA">
+		<jta-data-source>java:LoanAppDS</jta-data-source>
+	  <class>com.ez.model.entity.BankEntity</class>
+		<class>com.ez.model.entity.CustomerEntity</class>
+		<class>com.ez.model.entity.DepartmentEntity</class>
+		<class>com.ez.model.entity.EmployeeEntity</class>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.use_sql_comments" value="true" />
+			<property name="hibernate.transaction.manager_lookup_class"
+				value="org.hibernate.transaction.JBossTransactionManagerLookup" />
+			<property name="hibernate.transaction.factory_class"
+				value="org.hibernate.transaction.JTATransactionFactory" />
+			<property name="hibernate.current_session_context_class"
+				value="jta" />
+			<property name="jboss.entity.manager.factory.jndi.name"
+				value="java:/JPAezLoan" />
+		</properties>
+	</persistence-unit> -->
+</persistence>
